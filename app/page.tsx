@@ -1,65 +1,143 @@
-import Image from "next/image";
+"use client"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import { FeexPayProvider, FeexPayButton } from "@feexpay/react-sdk"
+import "@feexpay/react-sdk/style.css"
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main>
+      <Navbar />
+
+      {/* HERO */}
+      <section style={{background:"linear-gradient(135deg,#1e3d7b 0%,#0d2444 100%)",padding:"80px 20px",textAlign:"center"}}>
+        <div style={{maxWidth:800,margin:"0 auto"}}>
+          <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,68,102,0.15)",border:"1px solid rgba(255,68,102,0.3)",borderRadius:20,padding:"6px 16px",marginBottom:24}}>
+            <span style={{color:"#FF4466",fontSize:13,fontWeight:700}}>✦ Logiciel 100% Gratuit</span>
+          </div>
+
+          <h1 style={{color:"#fff",fontSize:"clamp(32px,5vw,56px)",fontWeight:900,lineHeight:1.15,marginBottom:20,letterSpacing:"-1px"}}>
+            LFD Bible Display
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p style={{color:"rgba(255,255,255,0.75)",fontSize:"clamp(16px,2vw,20px)",lineHeight:1.7,maxWidth:600,margin:"0 auto 36px"}}>
+            Projetez vos versets bibliques sur TV ou projecteur. Simple, rapide, puissant. Concu pour les eglises et ministeres.
           </p>
+
+          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+            <a
+              href="#download"
+              style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}
+            >
+              Telecharger gratuitement
+            </a>
+
+            <a
+              href="/help"
+              style={{background:"rgba(255,255,255,0.1)",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:700,textDecoration:"none",border:"1px solid rgba(255,255,255,0.2)"}}
+            >
+              Voir les tutoriels
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+      {/* FONCTIONNALITES */}
+      <section style={{padding:"80px 20px",background:"#f8f9fc"}}>
+        <div style={{maxWidth:1100,margin:"0 auto"}}>
+          <h2 style={{textAlign:"center",fontSize:32,fontWeight:800,color:"#0d2444",marginBottom:12}}>
+            Tout ce dont vous avez besoin
+          </h2>
+
+          <p style={{textAlign:"center",color:"#666",marginBottom:48,fontSize:16}}>
+            Une solution complete pour vos cultes et reunions
+          </p>
+
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20}}>
+            {[
+              {icon:"📖",title:"Plusieurs Bibles",desc:"Importez autant de traductions que vous voulez."},
+              {icon:"🎨",title:"Styles personnalises",desc:"Changez les couleurs en temps reel."},
+              {icon:"📷",title:"Camera en direct",desc:"Projetez votre camera sur la TV."},
+              {icon:"🖼",title:"Images & Annonces",desc:"Projetez des images facilement."},
+              {icon:"🔍",title:"Recherche rapide",desc:"Trouvez un verset rapidement."},
+              {icon:"✦",title:"Assistant IA",desc:"IA integree pour expliquer les versets."},
+            ].map(f => (
+              <div key={f.title} style={{background:"#fff",borderRadius:12,padding:28,boxShadow:"0 2px 12px rgba(13,36,68,0.06)",border:"1px solid #e8ecf5"}}>
+                <div style={{fontSize:36,marginBottom:14}}>{f.icon}</div>
+                <h3 style={{fontSize:18,fontWeight:700,color:"#0d2444",marginBottom:8}}>{f.title}</h3>
+                <p style={{color:"#666",fontSize:14,lineHeight:1.7}}>{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TELECHARGEMENT */}
+      <section id="download" style={{padding:"80px 20px",background:"#fff"}}>
+        <div style={{maxWidth:700,margin:"0 auto",textAlign:"center"}}>
+          <h2 style={{fontSize:36,fontWeight:800,color:"#0d2444",marginBottom:12}}>
+            Telecharger LFD Bible Display
+          </h2>
+
+          <p style={{color:"#666",fontSize:16,marginBottom:40,lineHeight:1.7}}>
+            Gratuit pour toujours. Compatible Windows 10/11.
+          </p>
+
+          <div style={{background:"linear-gradient(135deg,#1e3d7b,#0d2444)",borderRadius:16,padding:40,marginBottom:24}}>
+            <div style={{fontSize:64,marginBottom:16}}>✦</div>
+
+            <div style={{color:"#fff",fontSize:22,fontWeight:800,marginBottom:8}}>
+              LFD Bible Display v1.0.0
+            </div>
+
+            <div style={{color:"rgba(255,255,255,0.6)",fontSize:14,marginBottom:28}}>
+              Windows 10/11 • 64-bit • ~120 MB
+            </div>
+
+            {/* ✅ FIX ICI */}
+            <a
+              href={process.env.NEXT_PUBLIC_GOOGLE_DRIVE_LINK!}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                background:"#C0001A",
+                color:"#fff",
+                padding:"16px 40px",
+                borderRadius:8,
+                fontSize:18,
+                fontWeight:800,
+                textDecoration:"none",
+                display:"inline-flex",
+                alignItems:"center",
+                gap:10,
+                boxShadow:"0 4px 20px rgba(192,0,26,0.4)"
+              }}
+            >
+              Telecharger maintenant
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* SOUTIEN */}
+      <section style={{padding:"80px 20px"}}>
+        <div style={{textAlign:"center"}}>
+          <FeexPayProvider>
+            <FeexPayButton
+              amount={1000}
+              description="Soutien maintenance"
+              token={process.env.NEXT_PUBLIC_FEEXPAY_TOKEN!}
+              id={process.env.NEXT_PUBLIC_FEEXPAY_ID!}
+              customId={Date.now().toString()}
+              mode="LIVE"
+              currency="XOF"
+              callback={(res:any)=>console.log(res)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </FeexPayProvider>
         </div>
-      </main>
-    </div>
-  );
+      </section>
+
+      <Footer />
+    </main>
+  )
 }
