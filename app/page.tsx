@@ -124,14 +124,32 @@ export default function Home() {
           <h2 style={{fontSize:32,fontWeight:800,color:"#0d2444",marginBottom:16}}>
             Soutenir le projet
           </h2>
-          
-          <p style={{color:"#666",fontSize:16,marginBottom:16,lineHeight:1.7}}>
+
+          <p style={{color:"#666",fontSize:16,marginBottom:24,lineHeight:1.7}}>
             LFD Bible Display est 100% gratuit. Votre soutien nous aide à maintenir et améliorer le logiciel.
           </p>
-          
-          <div style={{marginBottom:16}}>
+
+          {/* Wrapper qui force le style noir sur le bouton FeexPay */}
+          <div style={{marginBottom:16}} className="feexpay-black-btn">
+            <style>{`
+              .feexpay-black-btn button {
+                background-color: #000000 !important;
+                color: #ffffff !important;
+                font-weight: 700 !important;
+                padding: 12px 32px !important;
+                border-radius: 8px !important;
+                font-size: 16px !important;
+                border: none !important;
+                cursor: pointer !important;
+                transition: background-color 0.2s !important;
+              }
+              .feexpay-black-btn button:hover {
+                background-color: #222222 !important;
+              }
+            `}</style>
+
             <FeexPayProvider>
-              <FeexPayButton 
+              <FeexPayButton
                 amount={1000}
                 description="Soutien maintenance LFD Bible Display"
                 token={process.env.NEXT_PUBLIC_FEEXPAY_TOKEN!}
@@ -139,15 +157,15 @@ export default function Home() {
                 customId={Date.now().toString()}
                 mode="LIVE"
                 currency="XOF"
+                case=""
                 callback={(response) => {
                   console.log(response);
                 }}
                 buttonText="🤝 Soutenir le logiciel"
-                buttonClass="bg-black hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-lg text-lg"
               />
             </FeexPayProvider>
           </div>
-          
+
           <p style={{color:"#999",fontSize:13}}>
             Votre soutien : 1000 FCFA (~1.50€). Modifiable sur la page de paiement.
           </p>
