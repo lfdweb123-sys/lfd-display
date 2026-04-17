@@ -39,11 +39,36 @@ export default function Navbar() {
               {href:"/#support",label:"Soutenir"},
               {href:"/help",label:"Aide"},
             ].map(l => (
-              <Link key={l.href} href={l.href} style={{color:"rgba(255,255,255,0.8)",fontSize:14,fontWeight:500,padding:"6px 12px",borderRadius:6,textDecoration:"none",transition:"all 0.15s",hover:{color:"#fff",background:"rgba(255,255,255,0.1)"}}}>
+              <Link 
+                key={l.href} 
+                href={l.href} 
+                style={{
+                  color:"rgba(255,255,255,0.8)",
+                  fontSize:14,
+                  fontWeight:500,
+                  padding:"6px 12px",
+                  borderRadius:6,
+                  textDecoration:"none",
+                  transition:"all 0.15s"
+                }}
+              >
                 {l.label}
               </Link>
             ))}
-            <Link href="/#download" style={{background:"#C0001A",color:"#fff",fontSize:14,fontWeight:700,padding:"8px 16px",borderRadius:7,textDecoration:"none",marginLeft:6,transition:"all 0.15s",hover:{background:"#a00016"}}}>
+            <Link 
+              href="/#download" 
+              style={{
+                background:"#C0001A",
+                color:"#fff",
+                fontSize:14,
+                fontWeight:700,
+                padding:"8px 16px",
+                borderRadius:7,
+                textDecoration:"none",
+                marginLeft:6,
+                transition:"all 0.15s"
+              }}
+            >
               Télécharger
             </Link>
           </div>
