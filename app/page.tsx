@@ -25,14 +25,14 @@ export default function Home() {
           </p>
 
           <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-            <a
+            
               href="#download"
               style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}
             >
               Télécharger gratuitement
             </a>
 
-            <a
+            
               href="/help"
               style={{background:"rgba(255,255,255,0.1)",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:700,textDecoration:"none",border:"1px solid rgba(255,255,255,0.2)"}}
             >
@@ -94,7 +94,7 @@ export default function Home() {
               Windows 10/11 • 64-bit • ~120 MB
             </div>
 
-            <a
+            
               href={process.env.NEXT_PUBLIC_GOOGLE_DRIVE_LINK!}
               target="_blank"
               rel="noreferrer"
@@ -143,7 +143,7 @@ export default function Home() {
                   console.log(response);
                 }}
                 buttonText="🤝 Soutenir le logiciel"
-                buttonClass="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg"
+                buttonClass="bg-black hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-lg text-lg"
               />
             </FeexPayProvider>
           </div>
