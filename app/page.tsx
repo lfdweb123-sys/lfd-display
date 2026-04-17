@@ -23,21 +23,43 @@ export default function Home() {
             Projetez vos versets bibliques sur TV ou projecteur. Simple, rapide, puissant. Con&#231;u pour les &#233;glises et minist&#232;res.
           </p>
 
-          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-            
-              href="#download"
-              style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}
-            >
-              T&#233;l&#233;charger gratuitement
-            </a>
+<div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+  
+  <a
+    href="#download"
+    style={{
+      background:"#C0001A",
+      color:"#fff",
+      padding:"14px 32px",
+      borderRadius:8,
+      fontSize:16,
+      fontWeight:800,
+      textDecoration:"none",
+      display:"inline-flex",
+      alignItems:"center",
+      gap:8,
+      boxShadow:"0 4px 20px rgba(192,0,26,0.4)"
+    }}
+  >
+    Télécharger gratuitement
+  </a>
 
-            
-              href="/help"
-              style={{background:"rgba(255,255,255,0.1)",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:700,textDecoration:"none",border:"1px solid rgba(255,255,255,0.2)"}}
-            >
-              Voir les tutoriels
-            </a>
-          </div>
+  <a
+    href="/help"
+    style={{
+      background:"rgba(255,255,255,0.1)",
+      color:"#fff",
+      padding:"14px 32px",
+      borderRadius:8,
+      fontSize:16,
+      fontWeight:700,
+      textDecoration:"none",
+      border:"1px solid rgba(255,255,255,0.2)"
+    }}
+  >
+    Voir les tutoriels
+  </a>
+</div>
         </div>
       </section>
 
