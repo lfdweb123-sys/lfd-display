@@ -94,7 +94,6 @@ export default function Home() {
               Windows 10/11 • 64-bit • ~120 MB
             </div>
 
-            {/* ✅ FIX ICI */}
             <a
               href={process.env.NEXT_PUBLIC_GOOGLE_DRIVE_LINK!}
               target="_blank"
@@ -120,20 +119,34 @@ export default function Home() {
       </section>
 
       {/* SOUTIEN */}
-      <section style={{padding:"80px 20px"}}>
-        <div style={{textAlign:"center"}}>
+      <section style={{padding:"80px 20px",background:"#f8f9fc"}}>
+        <div style={{textAlign:"center",maxWidth:600,margin:"0 auto"}}>
+          <h2 style={{fontSize:28,fontWeight:800,color:"#0d2444",marginBottom:16}}>
+            Soutenir le projet
+          </h2>
+          
+          <p style={{color:"#666",fontSize:16,marginBottom:32,lineHeight:1.7}}>
+            LFD Bible Display est 100% gratuit. Votre soutien nous aide à maintenir et améliorer le logiciel.
+          </p>
+          
           <FeexPayProvider>
             <FeexPayButton
               amount={1000}
-              description="Soutien maintenance"
+              description="Soutien maintenance LFD Bible Display"
               token={process.env.NEXT_PUBLIC_FEEXPAY_TOKEN!}
               id={process.env.NEXT_PUBLIC_FEEXPAY_ID!}
               customId={Date.now().toString()}
               mode="LIVE"
               currency="XOF"
               callback={(res:any)=>console.log(res)}
+              buttonText="🤝 Soutenir le logiciel"
+              buttonClass="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg"
             />
           </FeexPayProvider>
+          
+          <p style={{color:"#999",fontSize:12,marginTop:24}}>
+            Le montant suggéré est de 1000 FCFA (~1.50€). Vous pouvez modifier le montant sur la page de paiement.
+          </p>
         </div>
       </section>
 
