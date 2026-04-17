@@ -29,7 +29,7 @@ export default function Home() {
               href="#download"
               style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}
             >
-              Telecharger gratuitement
+              Télécharger gratuitement
             </a>
 
             <a
@@ -76,7 +76,7 @@ export default function Home() {
       <section id="download" style={{padding:"80px 20px",background:"#fff"}}>
         <div style={{maxWidth:700,margin:"0 auto",textAlign:"center"}}>
           <h2 style={{fontSize:36,fontWeight:800,color:"#0d2444",marginBottom:12}}>
-            Telecharger LFD Bible Display
+            Télécharger LFD Bible Display
           </h2>
 
           <p style={{color:"#666",fontSize:16,marginBottom:40,lineHeight:1.7}}>
@@ -112,40 +112,44 @@ export default function Home() {
                 boxShadow:"0 4px 20px rgba(192,0,26,0.4)"
               }}
             >
-              Telecharger maintenant
+              Télécharger maintenant
             </a>
           </div>
         </div>
       </section>
 
-      {/* SOUTIEN - avec fond de section pour contraster */}
-      <section id="support" style={{padding:"80px 20px",background:"#f8f9fc"}}>
-        <div style={{textAlign:"center",maxWidth:600,margin:"0 auto"}}>
-          <h2 style={{fontSize:28,fontWeight:800,color:"#0d2444",marginBottom:16}}>
+      {/* SOUTIEN */}
+      <section id="support" style={{padding:"80px 20px",background:"#fff"}}>
+        <div style={{maxWidth:600,margin:"0 auto",textAlign:"center"}}>
+          <h2 style={{fontSize:32,fontWeight:800,color:"#0d2444",marginBottom:16}}>
             Soutenir le projet
           </h2>
           
-          <p style={{color:"#666",fontSize:16,marginBottom:32,lineHeight:1.7}}>
+          <p style={{color:"#666",fontSize:16,marginBottom:16,lineHeight:1.7}}>
             LFD Bible Display est 100% gratuit. Votre soutien nous aide à maintenir et améliorer le logiciel.
           </p>
           
-          <FeexPayProvider>
-            <FeexPayButton
-              amount={1000}
-              description="Soutien maintenance LFD Bible Display"
-              token={process.env.NEXT_PUBLIC_FEEXPAY_TOKEN!}
-              id={process.env.NEXT_PUBLIC_FEEXPAY_ID!}
-              customId={Date.now().toString()}
-              mode="LIVE"
-              currency="XOF"
-              callback={(res:any)=>console.log(res)}
-              buttonText="🤝 Soutenir le logiciel"
-              buttonClass="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg"
-            />
-          </FeexPayProvider>
+          <div style={{marginBottom:16}}>
+            <FeexPayProvider>
+              <FeexPayButton 
+                amount={1000}
+                description="Soutien maintenance LFD Bible Display"
+                token={process.env.NEXT_PUBLIC_FEEXPAY_TOKEN!}
+                id={process.env.NEXT_PUBLIC_FEEXPAY_ID!}
+                customId={Date.now().toString()}
+                mode="LIVE"
+                currency="XOF"
+                callback={(response) => {
+                  console.log(response);
+                }}
+                buttonText="🤝 Soutenir le logiciel"
+                buttonClass="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg text-lg"
+              />
+            </FeexPayProvider>
+          </div>
           
-          <p style={{color:"#999",fontSize:12,marginTop:24}}>
-            Montant suggéré : 1000 FCFA (~1.50€). Modifiable sur la page de paiement.
+          <p style={{color:"#999",fontSize:13}}>
+            Votre soutien : 1000 FCFA (~1.50€). Modifiable sur la page de paiement.
           </p>
         </div>
       </section>
