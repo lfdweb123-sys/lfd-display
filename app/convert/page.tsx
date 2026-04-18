@@ -24,54 +24,55 @@ export default function ConvertPage() {
   const [fileName, setFileName] = useState("")
   const [loading, setLoading] = useState(false)
 
+  // Extraire tous les textes d un objet JSON recursivement
+  const extractTexts = (obj: any): string[] => {
+    if (typeof obj === "string" && obj.trim().length > 10) return [obj.trim()]
+    if (Array.isArray(obj)) return obj.flatMap((item: any) => extractTexts(item))
+    if (typeof obj === "object" && obj !== null) return Object.values(obj).flatMap((v: any) => extractTexts(v))
+    return []
+  }
+
   const convertToLFD = (data: any, name: string, fname: string): any => {
     const id = "bible_" + fname.replace(/[^a-z0-9]/gi, "_") + "_" + Date.now()
-    if (data.books && Array.isArray(data.books)) { if (name) data.name = name; return data }
-    if (Array.isArray(data) && data[0]?.c !== undefined) {
-      const books: any[] = []
-      let chapIdx = 0, bookOrder = 1
-      for (const b of BIBLE_BOOKS) {
-        if (chapIdx >= data.length) break
-        const chapters: Record<string,string[]> = {}
-        for (let c = 1; c <= b.ch && chapIdx < data.length; c++) {
-          const text = data[chapIdx].c ?? ""
-          const verses = text.split(/(?<=[.!?;])\s+(?=[A-Z])/).filter((s: string) => s.trim().length > 5)
-          chapters[String(c)] = verses.length > 1 ? verses : [text]
-          chapIdx++
-        }
-        books.push({name:b.name,shortName:b.short,testament:b.t,order:bookOrder++,chapters})
-      }
-      return {id,name:name||fname,language:"fr",books}
+
+    // Format LFD natif - garder tel quel
+    if (data.books && Array.isArray(data.books)) {
+      if (name) data.name = name
+      return data
     }
-    if (typeof data === "object" && !Array.isArray(data)) {
-      const keys = Object.keys(data)
-      if (keys.length > 0 && typeof data[keys[0]] === "object") {
-        const books = keys.map((bookName: string, bi: number) => {
-          const chapters: Record<string,string[]> = {}
-          Object.entries(data[bookName]).forEach(([ch,chapData]: [string,any]) => {
-            if (typeof chapData === "object" && !Array.isArray(chapData)) chapters[ch] = Object.values(chapData).map((v:any) => String(v))
-            else if (typeof chapData === "string") chapters[ch] = [chapData]
-            else if (Array.isArray(chapData)) chapters[ch] = chapData.map((v:any) => String(v))
-          })
-          return {name:bookName,shortName:bookName.substring(0,3).toUpperCase(),testament:bi<39?"OT":"NT",order:bi+1,chapters}
-        })
-        return {id,name:name||fname,language:"fr",books}
+
+    // Extraire TOUS les textes du JSON peu importe le format
+    const allTexts = extractTexts(data)
+    if (allTexts.length === 0) return null
+
+    // Repartir les textes dans les livres bibliques
+    const books: any[] = []
+    let textIdx = 0
+    let bookOrder = 1
+
+    for (const bookDef of BIBLE_BOOKS) {
+      if (textIdx >= allTexts.length) break
+      const chapters: Record<string, string[]> = {}
+      for (let c = 1; c <= bookDef.ch && textIdx < allTexts.length; c++) {
+        const text = allTexts[textIdx]
+        // Splitter en versets si possible
+        const verses = text.split(/(?<=[.!?;])\s+(?=[A-ZÀ-Ü])/).filter((s: string) => s.trim().length > 5)
+        chapters[String(c)] = verses.length > 1 ? verses : [text]
+        textIdx++
+      }
+      if (Object.keys(chapters).length > 0) {
+        books.push({name:bookDef.name,shortName:bookDef.short,testament:bookDef.t,order:bookOrder++,chapters})
       }
     }
-    if (Array.isArray(data) && data[0]?.text !== undefined) {
-      const booksMap = new Map<string,any>()
-      data.forEach((v:any) => {
-        const bn = v.book ?? "Livre"
-        if (!booksMap.has(bn)) booksMap.set(bn,{name:bn,chapters:{}})
-        const book = booksMap.get(bn)
-        const ch = String(v.chapter ?? 1)
-        if (!book.chapters[ch]) book.chapters[ch] = []
-        book.chapters[ch][parseInt(v.verse ?? 1)-1] = v.text ?? ""
-      })
-      const books = Array.from(booksMap.values()).map((b:any,i:number) => ({...b,shortName:b.name.substring(0,3).toUpperCase(),testament:i<39?"OT":"NT",order:i+1}))
-      return {id,name:name||fname,language:"fr",books}
+
+    // Si pas assez pour remplir les livres, tout mettre dans un seul livre
+    if (books.length === 0 || textIdx === 0) {
+      const chapters: Record<string,string[]> = {}
+      allTexts.forEach((text: string, i: number) => { chapters[String(i+1)] = [text] })
+      books.push({name: name || fname, shortName: fname.substring(0,3).toUpperCase(), testament: "OT", order: 1, chapters})
     }
-    return null
+
+    return {id, name: name || fname, language: "fr", books}
   }
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
