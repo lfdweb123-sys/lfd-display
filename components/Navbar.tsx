@@ -15,10 +15,17 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Fermer le menu quand on clique sur un lien
   const handleLinkClick = () => {
     setOpen(false)
   }
+
+  const navItems = [
+    {href:"/",label:"Accueil"},
+    {href:"/#download",label:"Télécharger"},
+    {href:"/#support",label:"Soutenir"},
+    {href:"/help",label:"Aide"},
+    {href:"/convert",label:"Convertir"},
+  ]
 
   return (
     <nav style={{background:"linear-gradient(180deg,#1e3d7b,#0d2444)",position:"sticky",top:0,zIndex:100,boxShadow:"0 2px 12px rgba(0,0,0,0.2)"}}>
@@ -33,14 +40,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         {!isMobile && (
           <div style={{display:"flex",gap:6,alignItems:"center"}}>
-            {[
-              {href:"/",label:"Accueil"},
-              {href:"/#download",label:"Télécharger"},
-              {href:"/#support",label:"Soutenir"},
-              {href:"/help",label:"Aide"},
-            {href:"/convert",label:"Convertir"},
-            {href:"/convert",label:"Convertir"},
-            ].map(l => (
+            {navItems.map(l => (
               <Link 
                 key={l.href} 
                 href={l.href} 
@@ -91,30 +91,9 @@ export default function Navbar() {
               zIndex:101
             }}
           >
-            <span style={{
-              display:"block",
-              width:"25px",
-              height:"2px",
-              background:"#fff",
-              transition:"all 0.3s",
-              transform: open ? "rotate(45deg) translate(5px, 6px)" : "none"
-            }} />
-            <span style={{
-              display:"block",
-              width:"25px",
-              height:"2px",
-              background:"#fff",
-              transition:"all 0.3s",
-              opacity: open ? 0 : 1
-            }} />
-            <span style={{
-              display:"block",
-              width:"25px",
-              height:"2px",
-              background:"#fff",
-              transition:"all 0.3s",
-              transform: open ? "rotate(-45deg) translate(5px, -6px)" : "none"
-            }} />
+            <span style={{display:"block",width:"25px",height:"2px",background:"#fff",transition:"all 0.3s",transform: open ? "rotate(45deg) translate(5px, 6px)" : "none"}} />
+            <span style={{display:"block",width:"25px",height:"2px",background:"#fff",transition:"all 0.3s",opacity: open ? 0 : 1}} />
+            <span style={{display:"block",width:"25px",height:"2px",background:"#fff",transition:"all 0.3s",transform: open ? "rotate(-45deg) translate(5px, -6px)" : "none"}} />
           </button>
         )}
       </div>
@@ -137,14 +116,7 @@ export default function Navbar() {
             zIndex:99
           }}
         >
-          {[
-            {href:"/",label:"Accueil"},
-            {href:"/#download",label:"Télécharger"},
-            {href:"/#support",label:"Soutenir"},
-            {href:"/help",label:"Aide"},
-            {href:"/convert",label:"Convertir"},
-            {href:"/convert",label:"Convertir"},
-          ].map(l => (
+          {navItems.map(l => (
             <Link
               key={l.href}
               href={l.href}
