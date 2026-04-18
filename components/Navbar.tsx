@@ -38,6 +38,8 @@ export default function Navbar() {
               {href:"/#download",label:"Télécharger"},
               {href:"/#support",label:"Soutenir"},
               {href:"/help",label:"Aide"},
+            {href:"/convert",label:"Convertir"},
+            {href:"/convert",label:"Convertir"},
             ].map(l => (
               <Link 
                 key={l.href} 
@@ -140,6 +142,8 @@ export default function Navbar() {
             {href:"/#download",label:"Télécharger"},
             {href:"/#support",label:"Soutenir"},
             {href:"/help",label:"Aide"},
+            {href:"/convert",label:"Convertir"},
+            {href:"/convert",label:"Convertir"},
           ].map(l => (
             <Link
               key={l.href}

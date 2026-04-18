@@ -25,17 +25,11 @@ export default function Home() {
           </p>
 
           <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
-            
-              href="#download"
-              style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}
-            >
+            <a href="#download" style={{background:"#C0001A",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:8,boxShadow:"0 4px 20px rgba(192,0,26,0.35)"}}>
               Télécharger gratuitement
             </a>
 
-            
-              href="/help"
-              style={{background:"rgba(255,255,255,0.1)",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:700,textDecoration:"none",border:"1px solid rgba(255,255,255,0.2)"}}
-            >
+            <a href="/help" style={{background:"rgba(255,255,255,0.1)",color:"#fff",padding:"14px 32px",borderRadius:8,fontSize:16,fontWeight:700,textDecoration:"none",border:"1px solid rgba(255,255,255,0.2)"}}>
               Voir les tutoriels
             </a>
           </div>
@@ -94,24 +88,8 @@ export default function Home() {
               Windows 10/11 • 64-bit • ~120 MB
             </div>
 
-            
-              href={process.env.NEXT_PUBLIC_GOOGLE_DRIVE_LINK!}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                background:"#C0001A",
-                color:"#fff",
-                padding:"16px 40px",
-                borderRadius:8,
-                fontSize:18,
-                fontWeight:800,
-                textDecoration:"none",
-                display:"inline-flex",
-                alignItems:"center",
-                gap:10,
-                boxShadow:"0 4px 20px rgba(192,0,26,0.4)"
-              }}
-            >
+            <a href={process.env.NEXT_PUBLIC_GOOGLE_DRIVE_LINK!} target="_blank" rel="noreferrer"
+              style={{background:"#C0001A",color:"#fff",padding:"16px 40px",borderRadius:8,fontSize:18,fontWeight:800,textDecoration:"none",display:"inline-flex",alignItems:"center",gap:10,boxShadow:"0 4px 20px rgba(192,0,26,0.4)"}}>
               Télécharger maintenant
             </a>
           </div>
